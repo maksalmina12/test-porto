@@ -1,0 +1,193 @@
+/* Variabel Warna dan Pengaturan Dasar */
+:root {
+    --bg-url-light: radial-gradient(circle at 10% 20%, rgb(163, 175, 220) 0%, rgb(98, 114, 164) 90.1%);
+    --text-color-light: #ffffff;
+    --accent-color-light: #5de5e8;
+    --card-bg-light: rgba(255, 255, 255, 0.1);
+    --button-bg-light: rgba(255, 255, 255, 0.15);
+    --logo-filter-light: grayscale(0%) brightness(1.2);
+
+    --bg-url-dark: radial-gradient(circle at 10% 20%, rgb(61, 61, 61) 0%, rgb(15, 15, 15) 90.1%);
+    --text-color-dark: #ffffff;
+    --accent-color-dark: #5de5e8;
+    --card-bg-dark: rgba(50, 50, 50, 0.2);
+    --button-bg-dark: rgba(70, 70, 70, 0.25);
+    --logo-filter-dark: grayscale(100%) brightness(1.5);
+}
+
+html[data-theme='light'] {
+    --bg-image: var(--bg-url-light);
+    --text-color: var(--text-color-light);
+    --accent-color: var(--accent-color-light);
+    --card-bg: var(--card-bg-light);
+    --button-bg: var(--button-bg-light);
+    --logo-filter: var(--logo-filter-light);
+    --spider-color: #d10000; /* Warna laba-laba di tema terang */
+}
+
+html[data-theme='dark'] {
+    --bg-image: var(--bg-url-dark);
+    --text-color: var(--text-color-dark);
+    --accent-color: var(--accent-color-dark);
+    --card-bg: var(--card-bg-dark);
+    --button-bg: var(--button-bg-dark);
+    --logo-filter: var(--logo-filter-dark);
+    --spider-color: #ff0000; /* Warna laba-laba di tema gelap */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.5s ease;
+}
+
+/* Efek Latar Belakang Blur */
+.background-shape {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: var(--bg-image);
+    background-size: cover;
+    filter: blur(80px);
+    z-index: -1;
+    transition: background-image 0.8s ease;
+}
+
+/* Header dan Navigasi */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+}
+
+.logo {
+    cursor: pointer;
+    z-index: 10;
+}
+
+.logo img {
+    width: 35px;
+    height: auto;
+    filter: drop-shadow(0 0 5px var(--spider-color)); /* Memberi efek glow */
+    transition: filter 0.3s ease;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+nav a.active {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Konten Utama */
+main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 10%;
+    height: calc(100vh - 120px); /* Sesuaikan tinggi berdasarkan header */
+}
+
+.info-section {
+    max-width: 50%;
+}
+
+.info-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.info-section p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
+    margin-bottom: 2rem;
+}
+
+.social-links a {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+.cv-button {
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--button-bg);
+    padding: 0.7rem 2rem;
+    border-radius: 20px;
+    font-weight: 400;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cv-button:hover {
+    background-color: var(--accent-color);
+    color: #111;
+}
+
+/* Bagian Logo Kanan */
+.logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-card {
+    width: 300px;
+    height: 300px;
+    background: var(--card-bg);
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+    transition: background-color 0.5s ease;
+}
+
+.logo-card img {
+    width: 80%;
+    filter: var(--logo-filter);
+    transition: filter 0.5s ease;
+}
