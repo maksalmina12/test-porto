@@ -1,39 +1,30 @@
-/* Variabel Warna dan Pengaturan Dasar */
+/* Variabel Warna dan Gambar */
 :root {
-    --bg-url-light: radial-gradient(circle at 10% 20%, rgb(163, 175, 220) 0%, rgb(98, 114, 164) 90.1%);
-    --text-color-light: #ffffff;
-    --accent-color-light: #5de5e8;
-    --card-bg-light: rgba(255, 255, 255, 0.1);
-    --button-bg-light: rgba(255, 255, 255, 0.15);
-    --logo-filter-light: grayscale(0%) brightness(1.2);
-
-    --bg-url-dark: radial-gradient(circle at 10% 20%, rgb(61, 61, 61) 0%, rgb(15, 15, 15) 90.1%);
-    --text-color-dark: #ffffff;
-    --accent-color-dark: #5de5e8;
-    --card-bg-dark: rgba(50, 50, 50, 0.2);
-    --button-bg-dark: rgba(70, 70, 70, 0.25);
-    --logo-filter-dark: grayscale(100%) brightness(1.5);
-}
-
-html[data-theme='light'] {
-    --bg-image: var(--bg-url-light);
-    --text-color: var(--text-color-light);
-    --accent-color: var(--accent-color-light);
-    --card-bg: var(--card-bg-light);
-    --button-bg: var(--button-bg-light);
-    --logo-filter: var(--logo-filter-light);
-    --spider-color: #d10000; /* Warna laba-laba di tema terang */
+    /* Variabel untuk tema terang (light) */
+    --bg-image: url('bahan/background light.jpg');
+    --theme-logo-image: url('bahan/logo theme dark.png'); /* DITUKAR */
+    --main-logo-image: url('bahan/logo mid right light.png');
+    
+    --text-color: #ffffff;
+    --accent-color: #5de5e8;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --button-bg: rgba(255, 255, 255, 0.15);
 }
 
 html[data-theme='dark'] {
-    --bg-image: var(--bg-url-dark);
-    --text-color: var(--text-color-dark);
-    --accent-color: var(--accent-color-dark);
-    --card-bg: var(--card-bg-dark);
-    --button-bg: var(--button-bg-dark);
-    --logo-filter: var(--logo-filter-dark);
-    --spider-color: #ff0000; /* Warna laba-laba di tema gelap */
+    /* Variabel untuk tema gelap (dark) */
+    --bg-image: url('bahan/background dark.jpg');
+    --theme-logo-image: url('bahan/logo theme light.png'); /* DITUKAR */
+    --main-logo-image: url('bahan/logo mid right dark.png');
+    
+    /* Variabel warna bisa tetap sama atau disesuaikan jika perlu */
+    --text-color: #ffffff;
+    --accent-color: #859f11;
+    --card-bg: rgba(50, 50, 50, 0.2);
+    --button-bg: rgba(70, 70, 70, 0.25);
 }
+
+/* --- (Sisa kode dari sini sebagian besar sama) --- */
 
 * {
     margin: 0;
@@ -51,21 +42,20 @@ body {
     transition: background-color 0.5s ease;
 }
 
-/* Efek Latar Belakang Blur */
 .background-shape {
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
-    background-image: var(--bg-image);
+    background-image: var(--bg-image); /* Menggunakan variabel gambar background */
     background-size: cover;
-    filter: blur(80px);
+    background-position: center;
+    filter: blur(25px); /* Blur bisa disesuaikan */
     z-index: -1;
-    transition: background-image 0.8s ease;
+    transition: background-image 1.8s ease;
 }
 
-/* Header dan Navigasi */
 header {
     display: flex;
     justify-content: space-between;
@@ -75,14 +65,15 @@ header {
 
 .logo {
     cursor: pointer;
-    z-index: 10;
+    z-index: 12;
 }
 
-.logo img {
-    width: 35px;
+.logo .theme-icon {
+    width: 40px;
     height: auto;
-    filter: drop-shadow(0 0 5px var(--spider-color)); /* Memberi efek glow */
-    transition: filter 0.3s ease;
+    /* Mengganti konten gambar berdasarkan variabel tema */
+    content: var(--theme-logo-image);
+    transition: content 1.0s ease;
 }
 
 nav ul {
@@ -99,22 +90,16 @@ nav a {
     transition: color 0.3s ease;
 }
 
-nav a:hover {
+nav a:hover, nav a.active {
     color: var(--accent-color);
 }
 
-nav a.active {
-    color: var(--accent-color);
-    font-weight: 600;
-}
-
-/* Konten Utama */
 main {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 2rem 10%;
-    height: calc(100vh - 120px); /* Sesuaikan tinggi berdasarkan header */
+    height: calc(100vh - 120px);
 }
 
 .info-section {
@@ -135,17 +120,20 @@ main {
 
 .social-links {
     margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Memberi jarak antar logo */
 }
 
-.social-links a {
-    color: var(--text-color);
-    font-size: 1.5rem;
-    margin-right: 1.5rem;
-    transition: color 0.3s ease;
+.social-links a img {
+    width: 28px; /* Atur ukuran logo sosial media */
+    height: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
-.social-links a:hover {
-    color: var(--accent-color);
+.social-links a:hover img {
+    opacity: 1;
 }
 
 .cv-button {
@@ -154,7 +142,6 @@ main {
     background-color: var(--button-bg);
     padding: 0.7rem 2rem;
     border-radius: 20px;
-    font-weight: 400;
     transition: background-color 0.3s ease, color 0.3s ease;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -165,7 +152,6 @@ main {
     color: #111;
 }
 
-/* Bagian Logo Kanan */
 .logo-section {
     display: flex;
     justify-content: center;
@@ -180,14 +166,121 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
-    transition: background-color 0.5s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(17, 145, 115, 0.05);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+    transition: background 0.5s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.logo-card img {
+.logo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(6, 70, 94, 0.1), rgba(38, 5, 68, 0.1));
+    border-radius: 40px;
+    pointer-events: none;
+}
+
+.logo-card .main-logo-img {
     width: 80%;
-    filter: var(--logo-filter);
-    transition: filter 0.5s ease;
+    content: var(--main-logo-image);
+    transition: content 0.5s ease;
+    z-index: 1; /* Menambahkan ini agar logo selalu di atas gradasi */
+}
+
+/* --- KODE BARU UNTUK ANIMASI DITAMBAHKAN DI SINI --- */
+
+/* EFEK GLOW FADE */
+@keyframes logo-change-effect {
+  0% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  40% {
+    opacity: 0.5;
+    filter: drop-shadow(0 0 15px var(--accent-color));
+  }
+  50% {
+      opacity: 0;
+      filter: drop-shadow(0 0 15px var(--accent-color));
+  }
+  60% {
+      opacity: 1;
+      filter: drop-shadow(0 0 15px var(--accent-color));
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+/* Class ini akan kita tambahkan lewat JavaScript untuk memicu animasi */
+.logo-is-changing {
+  animation: logo-change-effect 2.0s ease-in-out;
+}
+
+/* --- STYLE BARU UNTUK HALAMAN ABOUT (VERSI BESAR & LEBIH BAGUS) --- */
+
+main.about-page-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+    height: calc(100vh - 120px);
+}
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 750px; /* Diperbesar dari 600px */
+    color: var(--text-color);
+}
+
+.profile-picture-container {
+    background: transparent; /* <-- Ubah nilai pada baris ini */
+    padding: 0.8rem;
+    position: relative;
+ /* Hanya menyisakan bayangan hitam untuk kedalaman */
+     box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+}
+.profile-picture {
+    width: 400 px; /* Diperbesar dari 150px */
+    height: 400px; /* Diperbesar dari 150px */
+    border-radius: 5.2rem; /* Disesuaikan */
+    object-fit: cover;
+}
+
+.about-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; /* Diperbesar dari 2.2rem */
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.about-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem; /* Diperbesar dari 0.9rem */
+    font-weight: 300;
+    margin-top: 0.25rem;
+    margin-bottom: 2.5rem; /* Jarak lebih besar */
+}
+
+.about-description {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; /* Diperbesar dari 1rem */
+    line-height: 1.8;
+    font-weight: 400;
+
+    /* Efek Gradasi pada Teks */
+    background: linear-gradient(180deg, #FFFFFF, #B0B0B0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
